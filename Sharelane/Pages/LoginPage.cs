@@ -14,6 +14,7 @@ namespace Sharelane.Pages
         By PasswordInputLocator = By.Name("password");
         By LoginClickLocator = By.XPath("//input[@value='Login']");
         By HelloMessageLocator = By.XPath("//span[@class='user']");
+        By ErrorMessageLocator = By.XPath("//span[@class='error_message']");
 
         public LoginPage(WebDriver driver) : base(driver)
         {
@@ -37,6 +38,11 @@ namespace Sharelane.Pages
         public bool CheckHelloMessage()
         {
             return ChromeDriver.FindElement(HelloMessageLocator).Displayed;
+        }
+
+        public string CheckErrorMessage()
+        {
+            return ChromeDriver.FindElement(ErrorMessageLocator).Text;
         }
 
         public void Login(string email = "", string password = "")

@@ -14,7 +14,9 @@ namespace Sharelane.Tests
     {
         protected WebDriver ChromeDriver { get; set; }
         public SignUpPage SignUpPage { get; set; }
-        
+        public LoginPage LoginPage { get; set; }
+        public CredentialsPage CredentialsPage { get; set; }
+
 
         [SetUp]
         public void Setup()
@@ -22,7 +24,9 @@ namespace Sharelane.Tests
             ChromeDriver = new ChromeDriver();
             ChromeDriver.Manage().Window.Maximize();
             ChromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            SignUpPage = new SignUpPage(ChromeDriver);            
+            SignUpPage = new SignUpPage(ChromeDriver);
+            LoginPage = new LoginPage(ChromeDriver);
+            CredentialsPage = new CredentialsPage(ChromeDriver);
         }
 
         [TearDown]

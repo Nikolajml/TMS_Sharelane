@@ -10,16 +10,7 @@ namespace Sharelane.Tests
 {
     [TestFixture]
     internal class LoginTest : BaseTest
-    {
-        public LoginPage LoginPage { get; set; }
-        public CredentialsPage CredentialsPage { get; set; }
-
-        [SetUp]
-        public void Setup()
-        {
-            LoginPage = new LoginPage(ChromeDriver);
-            CredentialsPage = new CredentialsPage(ChromeDriver);
-        }
+    {                     
         [Test]
         public void Successful_LoginTest()
         {
@@ -30,6 +21,18 @@ namespace Sharelane.Tests
             LoginPage.Login(email, password);
 
             Assert.IsTrue(LoginPage.CheckHelloMessage());
+        }
+
+        [Test] 
+        public void Unsuccessful_LoginTest_CheckErrorMessage()
+        {
+            string expectedErrorMessage = "Oops, error. Email and/or password don't match our records";            
+            string password = "1111";
+
+            ChromeDriver.Navigate().GoToUrl("https://sharelane.com/cgi-bin/main.py");
+            LoginPage.Login(password: password);
+
+            Assert.That(LoginPage.CheckErrorMessage, Is.EqualTo(expectedErrorMessage));
         }
     }
 }
